@@ -120,18 +120,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Docker tomcat meta
-        id: docker_meta_tomcat
-        uses: crazy-max/ghaction-docker-meta@v3
-        with:
-          flavor: |
-            latest=false
-            prefix=
-            suffix=
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/plantuml-server
-          tags: |
-            type=semver,pattern=tomcat-{{raw}}
-            type=raw,value=tomcat
+      # - name: Docker tomcat meta
+      #   id: docker_meta_tomcat
+      #   uses: crazy-max/ghaction-docker-meta@v3
+      #   with:
+      #     flavor: |
+      #       latest=false
+      #       prefix=
+      #       suffix=
+      #     images: ${{ secrets.DOCKERHUB_USERNAME }}/plantuml-server
+      #     tags: |
+      #       type=semver,pattern=tomcat-{{raw}}
+      #       type=raw,value=tomcat
 
       - name: Docker jetty meta
         id: docker_meta_jetty
@@ -159,16 +159,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build & push tomcat
-        id: docker_build_tomcat
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile.tomcat
-          platforms: linux/arm64 #linux/amd64
-          push: true
-          tags: ${{ steps.docker_meta_tomcat.outputs.tags }}
-          labels: ${{ steps.docker_meta_tomcat.outputs.labels }}
+      # - name: Build & push tomcat
+      #   id: docker_build_tomcat
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile.tomcat
+      #     platforms: linux/arm64 #linux/amd64
+      #     push: true
+      #     tags: ${{ steps.docker_meta_tomcat.outputs.tags }}
+      #     labels: ${{ steps.docker_meta_tomcat.outputs.labels }}
 
       - name: Build & push jetty
         id: docker_build_jetty
